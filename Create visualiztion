@@ -1,0 +1,60 @@
+ # importing libraries.
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+ # load dataset.
+df = pd.read_csv('/content/CustomerAnalytics.csv')
+df.head()
+
+ # Visualize customer segmentation using pie charts.
+segment_names = ['Clothing', 'Footwear', 'Accessories', 'Outerwesr']
+segment_counts = [30,3,5,12]
+plt.figure(figsize=(8, 6))
+plt.pie(segment_counts, labels=segment_names, autopct='%1.1f%%', startangle=140)
+plt.title('Customer Segmentation')
+plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+plt.show()
+
+ # Create bar charts to compare sales performance across different customer segments.
+customer_segments = ['Clothing', 'Footwear', 'Accessories', 'Outerwear']
+sales_performance = [25000, 50000, 75000, 100000]  # Sales performance for each segment
+plt.figure(figsize=(10, 6))
+plt.bar(customer_segments, sales_performance, color='skyblue')
+plt.xlabel('Customer Segments')
+plt.ylabel('Sales Performance')
+plt.title('Sales Performance Across Customer Segments')
+plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+plt.tight_layout()  # Adjust layout to prevent clipping of labels
+plt.show()
+
+ # create heatmap to compare age and gender based on locations.
+pivot_table = df.pivot_table(index='Location', columns='Gender', values='Age', aggfunc='mean')
+plt.figure(figsize=(10, 8))
+sns.heatmap(pivot_table, annot=True, fmt=".1f", cmap="YlGnBu")
+plt.title('Average Age by Gender and Location')
+plt.xlabel('Gender')
+plt.ylabel('Location')
+plt.show()
+
+ # visualize comparison of purchase frequency by gender.
+plt.figure(figsize=(10, 8))
+sns.violinplot(data=customer_data, x='Gender', y='Frequency of Purchases', palette='Set2')
+plt.xlabel('Gender')
+plt.ylabel('Purchase Frequency')
+plt.title('Comparison of Purchase Frequency by Gender')
+plt.show()
+
+ # visualize average customer age by category using line chart.
+age_by_segment = df.groupby('Segment')['Age'].mean()
+age_by_segment.plot(kind='line', marker='o', figsize=(10, 6))
+plt.title('Average Customer Age by Category')
+plt.xlabel('Category')
+plt.ylabel('Average Age')
+plt.grid(True)
+plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+plt.tight_layout()
+plt.show()
+
+ # visualize 
